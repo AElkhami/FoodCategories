@@ -1,5 +1,6 @@
 package com.elkhami.data.repository
 
+import android.util.Log
 import com.elkhami.data.model.FoodCategories
 import com.elkhami.data.other.ErrorType
 import com.elkhami.data.other.Resource
@@ -29,7 +30,8 @@ class FoodCategoryRepositoryImpl @Inject constructor(
                 Resource.Error(message = response.message(), errorType = ErrorType.UnknownError)
             }
         }catch (e: Exception){
-            Resource.Error(message = response.message(), errorType = ErrorType.NetworkError)
+            Log.e("EXCEPTION", "EXCEPTION:", e)
+            Resource.Error(errorType = ErrorType.NetworkError)
         }
 
     }

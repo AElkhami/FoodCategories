@@ -10,7 +10,7 @@ sealed class Resource<T>(
     val status: Status
 ) {
     class Success<T>(data: T) : Resource<T>(data = data, status = Status.SUCCESS)
-    class Error<T>(data: T? = null, message: String, errorType: ErrorType) : Resource<T>(
+    class Error<T>(data: T? = null, message: String? = null, errorType: ErrorType) : Resource<T>(
         data = data, message = message, errorType = errorType, status = Status.FAILED
     )
 
