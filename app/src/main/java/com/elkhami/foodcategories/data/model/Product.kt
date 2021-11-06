@@ -1,4 +1,4 @@
-package com.elkhami.data.model
+package com.elkhami.foodcategories.data.model
 
 data class Product(
     val categoryId: String,

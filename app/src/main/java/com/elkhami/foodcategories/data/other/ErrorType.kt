@@ -1,4 +1,4 @@
-package com.elkhami.data.other
+package com.elkhami.foodcategories.data.other
 
 /**
  * Created by A.Elkhami on 06,November,2021

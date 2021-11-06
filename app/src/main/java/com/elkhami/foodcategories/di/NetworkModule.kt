@@ -1,6 +1,6 @@
-package com.elkhami.di
+package com.elkhami.foodcategories.di
 
-import com.elkhami.data.remote.FoodCategoriesApi
+import com.elkhami.foodcategories.data.remote.FoodCategoriesApi
 import com.elkhami.foodcategories.BuildConfig
 import com.google.gson.Gson
 import dagger.Module

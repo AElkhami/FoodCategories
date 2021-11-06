@@ -1,4 +1,4 @@
-package com.elkhami.application
+package com.elkhami.foodcategories.application
 
 import android.app.Application
 import dagger.hilt.android.HiltAndroidApp

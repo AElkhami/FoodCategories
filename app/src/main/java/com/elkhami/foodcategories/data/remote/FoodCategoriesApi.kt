@@ -1,6 +1,6 @@
-package com.elkhami.data.remote
+package com.elkhami.foodcategories.data.remote
 
-import com.elkhami.data.model.FoodCategories
+import com.elkhami.foodcategories.data.model.FoodCategories
 import retrofit2.Response
 import retrofit2.http.GET
 

@@ -1,8 +1,8 @@
-package com.elkhami.di
+package com.elkhami.foodcategories.di
 
-import com.elkhami.data.remote.FoodCategoriesApi
-import com.elkhami.data.repository.FoodCategoryRepository
-import com.elkhami.data.repository.FoodCategoryRepositoryImpl
+import com.elkhami.foodcategories.data.remote.FoodCategoriesApi
+import com.elkhami.foodcategories.data.repository.FoodCategoryRepository
+import com.elkhami.foodcategories.data.repository.FoodCategoryRepositoryImpl
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

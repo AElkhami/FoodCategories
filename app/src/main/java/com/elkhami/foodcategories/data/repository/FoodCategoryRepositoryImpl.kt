@@ -1,10 +1,10 @@
-package com.elkhami.data.repository
+package com.elkhami.foodcategories.data.repository
 
 import android.util.Log
-import com.elkhami.data.model.FoodCategories
-import com.elkhami.data.other.ErrorType
-import com.elkhami.data.other.Resource
-import com.elkhami.data.remote.FoodCategoriesApi
+import com.elkhami.foodcategories.data.model.FoodCategories
+import com.elkhami.foodcategories.data.other.ErrorType
+import com.elkhami.foodcategories.data.other.Resource
+import com.elkhami.foodcategories.data.remote.FoodCategoriesApi
 import java.lang.Exception
 import javax.inject.Inject
 
