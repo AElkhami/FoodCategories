@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".view.fooddetails.FoodDetailsFragment">
+
+        <ImageView
+            android:id="@+id/productImageView"
+            android:layout_width="@dimen/large_image_size"
+            android:layout_height="@dimen/large_image_size"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginTop="@dimen/normal_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:contentDescription="@string/food_image"
+            android:scaleType="fitXY"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="ImageContrastCheck"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/productNameTextView"
+            style="@style/TitleTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/normal_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/normal_margin"
+            android:gravity="center"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/productImageView"
+            tools:text="Food Name" />
+
+        <TextView
+            android:id="@+id/productPriceLable"
+            style="@style/NormalTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/small_margin"
+            android:layout_marginEnd="@dimen/text_to_text_margin"
+            android:gravity="end"
+            android:text="@string/price"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toStartOf="@+id/productPriceTextView"
+            app:layout_constraintStart_toStartOf="@+id/productNameTextView"
+            app:layout_constraintTop_toBottomOf="@+id/productNameTextView" />
+
+        <TextView
+            android:id="@+id/productPriceTextView"
+            style="@style/NormalTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:gravity="start"
+            app:layout_constraintEnd_toEndOf="@+id/productNameTextView"
+            app:layout_constraintStart_toEndOf="@+id/productPriceLable"
+            app:layout_constraintTop_toBottomOf="@+id/productNameTextView"
+            tools:text="Food Price" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

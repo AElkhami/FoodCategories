@@ -1,7 +1,8 @@
-package com.elkhami.foodcategories
+package com.elkhami.foodcategories.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.elkhami.foodcategories.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">FoodCategories</string>
+    <string name="food_image">Food image</string>
+    <string name="price">Price</string>
 </resources>
