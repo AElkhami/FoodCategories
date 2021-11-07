@@ -2,6 +2,7 @@ package com.elkhami.foodcategories.view.categorieslist
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.elkhami.foodcategories.data.other.Resource
 import com.elkhami.foodcategories.data.other.Status
 import com.elkhami.foodcategories.data.repository.FoodCategoryRepository
 import com.elkhami.foodcategories.view.UiState
@@ -14,10 +15,17 @@ class CategoriesListViewModel @Inject constructor(
     private val repository: FoodCategoryRepository
 ) : ViewModel() {
 
-    private val _uiStateFlow = MutableStateFlow(UiState(isLoading = true))
+    private val _uiStateFlow = MutableStateFlow(UiState(isLoading = false))
     var uiStateFlow = _uiStateFlow.asStateFlow()
 
+    init {
+        getFoodCategories()
+    }
+
     fun getFoodCategories() {
+
+        Resource.Loading(null)
+
         viewModelScope.launch {
             val response = repository.getFoodCategories()
             when (response.status) {

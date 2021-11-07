@@ -14,7 +14,7 @@ sealed class Resource<T>(
         data = data, message = message, errorType = errorType, status = Status.FAILED
     )
 
-    class Loading<T>() : Resource<T>(status = Status.LOADING)
+    class Loading<T>(data: T? = null) : Resource<T>(data = data, status = Status.LOADING)
 }
 
 enum class Status {
