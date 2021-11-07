@@ -14,6 +14,11 @@ object FoodCategoriesStub {
     private val product = Product("1", "dec","1", "Apple", salePrice, "")
     private val productsList = listOf(product)
     private val foodCategory = FoodCategory("desc", "1", "Food", productsList)
-    val foodCategories = listOf(foodCategory) as FoodCategories
+
+    val foodCategories = FoodCategories().apply {
+        add(foodCategory)
+    }
+
+
 
 }
