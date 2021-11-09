@@ -1,10 +1,10 @@
 package com.elkhami.foodcategories.data.model
 
 data class Product(
-    val categoryId: String,
-    val description: String,
-    val id: String,
-    val name: String,
-    val salePrice: SalePrice,
-    val url: String
+    var categoryId: String? = null,
+    var description: String? = null,
+    var id: String? = null,
+    var name: String? = null,
+    var salePrice: SalePrice? = null,
+    var url: String? = null
 )

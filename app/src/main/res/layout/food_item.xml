@@ -4,13 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="product"
+            type="com.elkhami.foodcategories.data.model.Product" />
     </data>
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/list_item_margin"
+        app:cardBackgroundColor="#E4E4E4"
         tools:context=".view.fooddetails.FoodDetailsFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
@@ -25,7 +28,8 @@
                 android:layout_marginTop="@dimen/normal_margin"
                 android:layout_marginBottom="@dimen/normal_margin"
                 android:contentDescription="@string/food_image"
-                android:scaleType="fitXY"
+                android:scaleType="centerCrop"
+                imageUrl="@{product.url}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -39,6 +43,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/normal_margin"
                 android:layout_marginEnd="@dimen/normal_margin"
+                android:text="@{product.name}"
                 app:layout_constraintBottom_toBottomOf="@+id/productItemImageView"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/productItemImageView"
