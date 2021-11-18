@@ -2,6 +2,7 @@ package com.elkhami.foodcategories.extensions
 
 import android.widget.ImageView
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.resource.bitmap.CenterCrop
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners
 import com.elkhami.foodcategories.R
 import com.elkhami.foodcategories.utils.Constants.ROUNDING_RADIUS
@@ -16,7 +17,7 @@ object GlideExtensions {
             .with(context)
             .load(url)
             .placeholder(R.drawable.ic_no_image_found)
-            .transform(RoundedCorners(ROUNDING_RADIUS))
+            .transform(CenterCrop(), RoundedCorners(ROUNDING_RADIUS))
             .into(this)
     }
 }

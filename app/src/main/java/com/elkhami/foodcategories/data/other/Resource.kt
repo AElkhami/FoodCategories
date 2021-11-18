@@ -14,8 +14,3 @@ sealed class Resource<T>(
         data = data, message = message, errorType = errorType, status = Status.FAILED
     )
 }
-
-enum class Status {
-    SUCCESS,
-    FAILED
-}

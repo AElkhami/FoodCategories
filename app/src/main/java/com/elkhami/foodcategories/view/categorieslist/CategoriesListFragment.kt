@@ -15,8 +15,8 @@ import com.elkhami.foodcategories.data.model.Product
 import com.elkhami.foodcategories.data.other.ErrorType
 import com.elkhami.foodcategories.databinding.FragmentCategoriesListBinding
 import com.elkhami.foodcategories.extensions.FragmentExtensions.showSnackBar
-import com.elkhami.foodcategories.extensions.FragmentExtensions.startLoading
-import com.elkhami.foodcategories.extensions.FragmentExtensions.stopLoading
+import com.elkhami.foodcategories.extensions.ViewExtensions.startLoading
+import com.elkhami.foodcategories.extensions.ViewExtensions.stopLoading
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -65,9 +65,9 @@ class CategoriesListFragment : Fragment() {
 
     private fun manageLoadingState(isLoading: Boolean) {
         if (isLoading) {
-            startLoading(binding.loadingProgress)
+            binding.loadingProgress.startLoading()
         } else {
-            stopLoading(binding.loadingProgress)
+            binding.loadingProgress.stopLoading()
         }
     }
 
