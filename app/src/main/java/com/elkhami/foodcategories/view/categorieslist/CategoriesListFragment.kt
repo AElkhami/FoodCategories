@@ -25,13 +25,14 @@ import kotlinx.coroutines.launch
 class CategoriesListFragment : Fragment() {
 
     private val viewModel: CategoriesListViewModel by viewModels()
-    private lateinit var binding: FragmentCategoriesListBinding
+    private var _binding: FragmentCategoriesListBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = DataBindingUtil.inflate(
+        _binding = DataBindingUtil.inflate(
             inflater,
             R.layout.fragment_categories_list,
             container,
@@ -85,5 +86,10 @@ class CategoriesListFragment : Fragment() {
                 }
             }
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
