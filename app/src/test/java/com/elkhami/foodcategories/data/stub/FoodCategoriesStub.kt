@@ -11,14 +11,21 @@ import com.elkhami.foodcategories.data.model.SalePrice
 object FoodCategoriesStub {
 
     private val salePrice = SalePrice("10", "EGP")
-    private val product = Product("1", "dec","1", "Apple", salePrice, "")
-    private val productsList = listOf(product)
-    private val foodCategory = FoodCategory("desc", "1", "Food", productsList)
+    private val product1 = Product(
+        categoryId = null,
+        description = null,
+        id = null,
+        name = "Food",
+        salePrice = null,
+        url = null
+    )
+    private val product2 = Product("1", "dec", "1", "Apple", salePrice, "")
+    val productsList = listOf(product2)
+    val foodCategory = FoodCategory("desc", "1", "Food", productsList)
 
     val foodCategories = FoodCategories().apply {
         add(foodCategory)
     }
 
-
-
+    val mockedProductsList = listOf(product1, product2)
 }

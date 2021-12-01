@@ -48,7 +48,9 @@ class CategoriesListFragment : Fragment() {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiStateFlow.collectLatest { uiState ->
 
-                    setUpAdapter(uiState.foodCategories)
+                    uiState.data?.let {
+                        setUpAdapter(it)
+                    }
 
                     manageLoadingState(uiState.isLoading)
 

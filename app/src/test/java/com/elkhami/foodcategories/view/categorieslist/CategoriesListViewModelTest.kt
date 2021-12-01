@@ -2,10 +2,11 @@ package com.elkhami.foodcategories.view.categorieslist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.elkhami.foodcategories.data.repository.TestFoodCategoryRepository
-import com.elkhami.foodcategories.data.stub.FoodCategoriesStub
+import com.elkhami.foodcategories.data.stub.FoodCategoriesStub.mockedProductsList
 import com.elkhami.foodcategories.testrules.MainCoroutineRule
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
@@ -24,8 +25,8 @@ class CategoriesListViewModelTest {
     @get:Rule
     val coroutineRule = MainCoroutineRule()
 
-    lateinit var viewModel: CategoriesListViewModel
-    lateinit var repository: TestFoodCategoryRepository
+    private lateinit var viewModel: CategoriesListViewModel
+    private lateinit var repository: TestFoodCategoryRepository
 
     @Before
     fun setUp() {
@@ -34,14 +35,13 @@ class CategoriesListViewModelTest {
     }
 
     @Test
-    fun `get food data from repository, returns the data`() {
-
-        runBlockingTest {
+    fun `get food data from repository, returns the data`() =
+        runBlocking {
             viewModel.getFoodCategories()
 
-            assertThat(viewModel.uiStateFlow.value.foodCategories).isEqualTo(FoodCategoriesStub.foodCategories)
+            assertThat(viewModel.uiStateFlow.value.data).isEqualTo(mockedProductsList)
         }
-    }
+
 
     @Test
     fun `get from data from repository, returns unknown error`() {
