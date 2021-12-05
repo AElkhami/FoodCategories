@@ -6,7 +6,6 @@ import com.elkhami.foodcategories.data.stub.FoodCategoriesStub.mockedProductsLis
 import com.elkhami.foodcategories.testrules.MainCoroutineRule
 import com.google.common.truth.Truth.assertThat
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.runBlocking
 import kotlinx.coroutines.test.runBlockingTest
 import org.junit.Before
 import org.junit.Rule
@@ -36,7 +35,7 @@ class CategoriesListViewModelTest {
 
     @Test
     fun `get food data from repository, returns the data`() =
-        runBlocking {
+        runBlockingTest {
             viewModel.getFoodCategories()
 
             assertThat(viewModel.uiStateFlow.value.data).isEqualTo(mockedProductsList)
@@ -44,7 +43,7 @@ class CategoriesListViewModelTest {
 
 
     @Test
-    fun `get from data from repository, returns unknown error`() {
+    fun `get from data from repository, returns unknown error`() =
 
         runBlockingTest {
             repository.setReturnError(true)
@@ -53,5 +52,4 @@ class CategoriesListViewModelTest {
 
             assertThat(viewModel.uiStateFlow.value.message).isEqualTo("error")
         }
-    }
 }

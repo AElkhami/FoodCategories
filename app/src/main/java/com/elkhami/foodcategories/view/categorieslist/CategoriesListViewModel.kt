@@ -16,10 +16,12 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CategoriesListViewModel @Inject constructor(
-    private val repository: FoodCategoryRepository
+    private val repository: FoodCategoryRepository,
 ) : ViewModel() {
 
-    private val _uiStateFlow = MutableStateFlow(UiState<List<Product>>(isLoading = true))
+    private val currentState = UiState<List<Product>>()
+
+    private val _uiStateFlow = MutableStateFlow(currentState)
 
     var uiStateFlow = _uiStateFlow.asStateFlow()
 
@@ -28,6 +30,10 @@ class CategoriesListViewModel @Inject constructor(
     }
 
     fun getFoodCategories() {
+        _uiStateFlow.value =
+            UiState(
+                isLoading = true
+            )
 
         viewModelScope.launch {
             val response = repository.getFoodCategories()
