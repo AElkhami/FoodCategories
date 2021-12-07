@@ -7,7 +7,7 @@ import com.elkhami.foodcategories.data.model.FoodCategories
 import com.elkhami.foodcategories.data.model.Product
 import com.elkhami.foodcategories.data.other.Status
 import com.elkhami.foodcategories.data.repository.FoodCategoryRepository
-import com.elkhami.foodcategories.view.UiState
+import com.elkhami.foodcategories.view.utils.UiState
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
