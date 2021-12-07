@@ -1,7 +1,5 @@
-package com.elkhami.foodcategories.view
+package com.elkhami.foodcategories.view.utils
 
-import com.elkhami.foodcategories.data.model.FoodCategory
-import com.elkhami.foodcategories.data.model.Product
 import com.elkhami.foodcategories.data.other.ErrorType
 
 /**

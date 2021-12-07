@@ -11,12 +11,9 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.elkhami.foodcategories.R
-import com.elkhami.foodcategories.data.model.Product
-import com.elkhami.foodcategories.data.other.ErrorType
 import com.elkhami.foodcategories.databinding.FragmentCategoriesListBinding
-import com.elkhami.foodcategories.extensions.FragmentExtensions.showSnackBar
-import com.elkhami.foodcategories.extensions.ViewExtensions.startLoading
-import com.elkhami.foodcategories.extensions.ViewExtensions.stopLoading
+import com.elkhami.foodcategories.view.utils.ViewOperations.manageLoadingState
+import com.elkhami.foodcategories.view.utils.ViewOperations.onErrorReceived
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -25,8 +22,11 @@ import kotlinx.coroutines.launch
 class CategoriesListFragment : Fragment() {
 
     private val viewModel: CategoriesListViewModel by viewModels()
+
     private var _binding: FragmentCategoriesListBinding? = null
     private val binding get() = _binding!!
+
+    private val adapter = CategoriesListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,50 +44,32 @@ class CategoriesListFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        viewModel.updateUiWithData()
+
+        setUpAdapter()
+
+        collectCategoriesList()
+    }
+
+    private fun collectCategoriesList() {
         lifecycleScope.launch {
             repeatOnLifecycle(Lifecycle.State.STARTED) {
                 viewModel.uiStateFlow.collectLatest { uiState ->
 
-                    uiState.data?.let {
-                        setUpAdapter(it)
+                    uiState.data?.let { foodCategories ->
+                        adapter.submitList(foodCategories)
                     }
 
-                    manageLoadingState(uiState.isLoading)
+                    manageLoadingState(binding.loadingProgress, uiState.isLoading)
 
-                    onErrorReceived(uiState.errorType, uiState.message)
+                    onErrorReceived(this@CategoriesListFragment, uiState.errorType, uiState.message)
                 }
             }
         }
     }
 
-    private fun setUpAdapter(foodCategories: List<Product>) {
-        val adapter = CategoriesListAdapter()
-        adapter.submitList(foodCategories)
+    private fun setUpAdapter() {
         binding.adapter = adapter
-    }
-
-    private fun manageLoadingState(isLoading: Boolean) {
-        if (isLoading) {
-            binding.loadingProgress.startLoading()
-        } else {
-            binding.loadingProgress.stopLoading()
-        }
-    }
-
-    private fun onErrorReceived(errorType: ErrorType?, message: String?) {
-        when (errorType) {
-            ErrorType.UnknownError -> {
-                showSnackBar(getString(R.string.unknown_error_message))
-            }
-            ErrorType.NetworkError -> {
-                showSnackBar(getString(R.string.network_error_message))
-            }
-            ErrorType.ResponseError -> {
-                message?.let {
-                    showSnackBar(it)
-                }
-            }
-        }
     }
 
     override fun onDestroy() {
