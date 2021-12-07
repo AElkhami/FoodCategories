@@ -25,40 +25,36 @@ class CategoriesListViewModel @Inject constructor(
 
     var uiStateFlow = _uiStateFlow.asStateFlow()
 
-    init {
-        getFoodCategories()
-    }
-
-    fun getFoodCategories() {
-        _uiStateFlow.value =
-            UiState(
-                isLoading = true
-            )
+    fun updateUiWithData() {
+        _uiStateFlow.value = UiState(isLoading = true)
 
         viewModelScope.launch {
-            val response = repository.getFoodCategories()
-            when (response.status) {
-                Status.SUCCESS -> {
-                    response.data?.let { foodCategories ->
+            val foodCategoriesList = getFoodCategories()
 
-                        val productList = flattenFoodCategoriesToProductList(foodCategories)
+            foodCategoriesList?.let {
+                val productList = flattenFoodCategoriesToProductList(it)
 
-                        mapImageUrlString(productList)
+                val mappedProductList = mapImageUrlString(productList)
 
-                        _uiStateFlow.value =
-                            UiState(
-                                data = productList,
-                                isLoading = false
-                            )
-                    }
-                }
-                Status.FAILED -> {
-                    _uiStateFlow.value = UiState(
-                        errorType = response.errorType,
-                        message = response.message,
-                        isLoading = false
-                    )
-                }
+                _uiStateFlow.value = UiState(data = mappedProductList, isLoading = false)
+            }
+        }
+    }
+
+    suspend fun getFoodCategories(): FoodCategories? {
+
+        val response = repository.getFoodCategories()
+        return when (response.status) {
+            Status.SUCCESS -> {
+                response.data
+            }
+            Status.FAILED -> {
+                _uiStateFlow.value = UiState(
+                    errorType = response.errorType,
+                    message = response.message,
+                    isLoading = false
+                )
+                null
             }
         }
     }
@@ -71,13 +67,14 @@ class CategoriesListViewModel @Inject constructor(
         }
     }
 
-    fun mapImageUrlString(productList: List<Product>) {
+    fun mapImageUrlString(productList: List<Product>): List<Product> {
         productList.map { product ->
             product.url = product.url?.let {
                 BuildConfig.BASE_URL
                     .replaceAfter("com", it, "//")
             }
         }
+        return productList
     }
 
 }
