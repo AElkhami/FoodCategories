@@ -1,7 +1,6 @@
 package com.elkhami.foodcategories.view.categorieslist
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
-import com.elkhami.foodcategories.data.model.FoodCategories
 import com.elkhami.foodcategories.data.repository.TestFoodCategoryRepository
 import com.elkhami.foodcategories.data.stub.*
 import com.elkhami.foodcategories.testrules.MainCoroutineRule
@@ -28,14 +27,10 @@ class CategoriesListViewModelTest {
     private lateinit var viewModel: CategoriesListViewModel
     private lateinit var repository: TestFoodCategoryRepository
 
-    lateinit var outFoodCategories: FoodCategories
-
     @Before
     fun setUp() {
         repository = TestFoodCategoryRepository()
         viewModel = CategoriesListViewModel(repository)
-
-        outFoodCategories = OutputFoodCategoriesStub().outFoodCategories
     }
 
     @Test
@@ -43,7 +38,7 @@ class CategoriesListViewModelTest {
         runBlockingTest {
             val foodCategories = viewModel.getFoodCategories()
 
-            assertThat(foodCategories).isEqualTo(outFoodCategories)
+            assertThat(foodCategories).isEqualTo(OutputFoodCategoriesStub().outFoodCategories)
         }
 
 
