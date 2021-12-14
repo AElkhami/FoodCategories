@@ -9,7 +9,7 @@
         android:id="@+id/categoriesListFragment"
         android:name="com.elkhami.foodcategories.view.categorieslist.CategoriesListFragment"
         android:label="fragment_categories_list"
-        tools:layout="@layout/fragment_categories_list" >
+        tools:layout="@layout/fragment_categories_list">
         <action
             android:id="@+id/action_categoriesListFragment_to_foodDetailsFragment"
             app:destination="@id/foodDetailsFragment" />
@@ -18,5 +18,9 @@
         android:id="@+id/foodDetailsFragment"
         android:name="com.elkhami.foodcategories.view.fooddetails.FoodDetailsFragment"
         android:label="fragment_food_details"
-        tools:layout="@layout/fragment_food_details" />
+        tools:layout="@layout/fragment_food_details">
+        <argument
+            android:name="foodDetails"
+            app:argType="com.elkhami.foodcategories.data.model.Product" />
+    </fragment>
 </navigation>

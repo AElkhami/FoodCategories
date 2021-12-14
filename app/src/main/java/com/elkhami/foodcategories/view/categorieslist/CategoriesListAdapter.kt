@@ -22,6 +22,12 @@ private const val BODY = 1
 class CategoriesListAdapter :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
 
+    private var onClickListener: ((product: Product) -> Unit)? = null
+
+    fun setOnItemClickListener(listener: (product: Product) -> Unit) {
+        onClickListener = listener
+    }
+
     private val differ = AsyncListDiffer(this, DiffUtilCallback())
 
     fun submitList(categoryList: List<Product>) {
@@ -54,7 +60,7 @@ class CategoriesListAdapter :
 
             @JvmStatic
             @BindingAdapter("imageUrl")
-            fun setImageUrl(imgView: ImageView, url: String){
+            fun setImageUrl(imgView: ImageView, url: String) {
                 imgView.loadImage(url)
             }
 
@@ -88,6 +94,12 @@ class CategoriesListAdapter :
             }
             BODY -> {
                 (holder as BodyViewHolder).bindBody(categoryItem)
+
+                holder.itemView.setOnClickListener {
+                    onClickListener?.let {
+                        it(categoryItem)
+                    }
+                }
             }
         }
     }

@@ -10,8 +10,10 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import com.elkhami.foodcategories.R
 import com.elkhami.foodcategories.databinding.FragmentCategoriesListBinding
+import com.elkhami.foodcategories.utils.Constants
 import com.elkhami.foodcategories.view.utils.ViewOperations.manageLoadingState
 import com.elkhami.foodcategories.view.utils.ViewOperations.onErrorReceived
 import dagger.hilt.android.AndroidEntryPoint
@@ -48,7 +50,18 @@ class CategoriesListFragment : Fragment() {
 
         setUpAdapter()
 
+        setOnItemClickListener()
+
         collectCategoriesList()
+    }
+
+    private fun setOnItemClickListener() {
+        adapter.setOnItemClickListener {
+            val bundle = Bundle().apply {
+                putParcelable(Constants.ProductData, it)
+            }
+            findNavController().navigate(R.id.action_categoriesListFragment_to_foodDetailsFragment, bundle)
+        }
     }
 
     private fun collectCategoriesList() {

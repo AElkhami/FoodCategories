@@ -67,5 +67,19 @@
             app:layout_constraintTop_toBottomOf="@+id/productNameTextView"
             tools:text="Food Price" />
 
+        <TextView
+            android:id="@+id/productPriceCurrencyText"
+            style="@style/NormalTextViewStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/text_to_text_margin"
+            android:layout_marginTop="@dimen/small_margin"
+            android:gravity="end"
+            android:text="@string/price"
+            android:textStyle="bold"
+            app:layout_constraintStart_toEndOf="@+id/productPriceTextView"
+            app:layout_constraintTop_toBottomOf="@+id/productNameTextView" />
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
