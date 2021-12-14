@@ -19,6 +19,8 @@ class CategoriesListViewModel @Inject constructor(
     private val repository: FoodCategoryRepository,
 ) : ViewModel() {
 
+    private var isDataReturned = false
+
     private val currentState = UiState<List<Product>>()
 
     private val _uiStateFlow = MutableStateFlow(currentState)
@@ -26,6 +28,10 @@ class CategoriesListViewModel @Inject constructor(
     var uiStateFlow = _uiStateFlow.asStateFlow()
 
     fun updateUiWithData() {
+        if(isDataReturned){
+            return
+        }
+
         _uiStateFlow.value = UiState(isLoading = true)
 
         viewModelScope.launch {
@@ -46,6 +52,7 @@ class CategoriesListViewModel @Inject constructor(
         val response = repository.getFoodCategories()
         return when (response.status) {
             Status.SUCCESS -> {
+                isDataReturned = true
                 response.data
             }
             Status.FAILED -> {
